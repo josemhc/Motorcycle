@@ -1,0 +1,4 @@
+ id | address | birth_date | document_number | document_type | email | first_name | last_name | phone_number | position 
+----+---------+------------+-----------------+---------------+-------+------------+-----------+--------------+----------
+(0 rows)
+

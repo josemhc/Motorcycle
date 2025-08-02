@@ -1,0 +1,44 @@
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+**/generated-sources/
+dependency-reduced-pom.xml
+release.properties
+
+# Logs
+*.log
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+.target/
+
+# VS Code
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de entorno
+.env
+*.env
+
+# Base de datos temporal o archivos de prueba
+*.h2.db
+*.mv.db
+
+# Otros
+*.swp
+*.bak
+*.tmp
+
+# Docker
+**/docker-compose.override.yml
