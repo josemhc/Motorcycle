@@ -4,13 +4,15 @@ import com.Motocicletas.model.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IProductService {
-    Product findById (Long id);
 
     List<Product> findAll ();
 
-    Product createProduct(Product product);
+    Optional<Product> findById (Long id);
+
+    void createProduct(Product product);
 
     void deleteById(Long id);
 }
