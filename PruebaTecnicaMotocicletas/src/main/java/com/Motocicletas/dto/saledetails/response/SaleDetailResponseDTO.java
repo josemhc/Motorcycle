@@ -1,4 +1,4 @@
-package com.Motocicletas.DTO.response;
+package com.Motocicletas.dto.saledetails.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

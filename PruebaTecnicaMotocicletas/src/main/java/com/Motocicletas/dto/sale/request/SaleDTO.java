@@ -1,5 +1,6 @@
-package com.Motocicletas.DTO.request;
+package com.Motocicletas.dto.sale.request;
 
+import com.Motocicletas.dto.saledetails.request.SaleDetailDTO;
 import lombok.Getter;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.Motocicletas.DTO.request;
+package com.Motocicletas.dto.saledetails.request;
 
 import lombok.Getter;
 

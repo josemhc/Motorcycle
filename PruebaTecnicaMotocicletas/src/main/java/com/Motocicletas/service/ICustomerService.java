@@ -3,13 +3,15 @@ package com.Motocicletas.service;
 import com.Motocicletas.model.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ICustomerService {
-    Customer findById (Long id);
 
     List<Customer> findAll ();
 
-    Customer createCustomer(Customer customer);
+    Optional<Customer> findById (Long id);
+
+    void createCustomer(Customer customer);
 
     void deleteById(Long id);
 }

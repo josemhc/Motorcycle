@@ -1,9 +1,10 @@
 package com.Motocicletas.service.implementations;
 
-import com.Motocicletas.DTO.request.SaleDTO;
-import com.Motocicletas.DTO.request.SaleDetailDTO;
-import com.Motocicletas.DTO.response.SaleDetailResponseDTO;
-import com.Motocicletas.DTO.response.SaleResponseDTO;
+import com.Motocicletas.ResourceNotFoundException;
+import com.Motocicletas.dto.sale.request.SaleDTO;
+import com.Motocicletas.dto.saledetails.request.SaleDetailDTO;
+import com.Motocicletas.dto.saledetails.response.SaleDetailResponseDTO;
+import com.Motocicletas.dto.sale.response.SaleResponseDTO;
 import com.Motocicletas.model.Product;
 import com.Motocicletas.model.Sale;
 import com.Motocicletas.model.SaleDetail;
@@ -35,7 +36,7 @@ public class SaleServiceImpl implements ISaleService {
 
         // Encontramos la venta por id (Si existe, si no lanzamos un error)
 
-        Sale sale = saleRepository.findById(id).orElseThrow();
+        Sale sale = saleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Venta no encontrada con id: " + id));
 
         // Guardamos los nombres del cliente y el empleado asociados a la venta
 
@@ -92,8 +93,8 @@ public class SaleServiceImpl implements ISaleService {
         // Aqui se guarda el empleado y el cliente al que esta asociada la venta que se crea, utilizando un DTO para manejar solo los datos necesarios
 
         Sale sale = new Sale();
-        sale.setCustomer(customerRepository.findById(saleDTO.getClientId()).orElseThrow());
-        sale.setEmployee(employeeRepository.findById(saleDTO.getEmployeeId()).orElseThrow());
+        sale.setCustomer(customerRepository.findById(saleDTO.getClientId()).orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con id: " + saleDTO.getClientId())));
+        sale.setEmployee(employeeRepository.findById(saleDTO.getEmployeeId()).orElseThrow(() -> new ResourceNotFoundException("Empleado no encontrado con id: " + saleDTO.getClientId())));
 
         List<SaleDetail> details = new ArrayList<>();
         double total = 0;
@@ -123,8 +124,10 @@ public class SaleServiceImpl implements ISaleService {
     }
 
     @Override
-    public void deleteSale (Long id) {
-        Sale sale = saleRepository.findById(id).orElseThrow();
-        saleRepository.deleteById(sale.getId());
+    public void deleteSale(Long id) {
+        Sale sale = saleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Venta no encontrada con id: " + id));
+        saleRepository.delete(sale);
     }
+
 }

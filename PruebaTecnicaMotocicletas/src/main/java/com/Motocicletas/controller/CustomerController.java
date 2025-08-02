@@ -1,5 +1,6 @@
 package com.Motocicletas.controller;
 
+import com.Motocicletas.dto.customer.CustomerDTO;
 import com.Motocicletas.model.Customer;
 import com.Motocicletas.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -18,23 +22,91 @@ public class CustomerController {
     private ICustomerService customerService;
 
     @GetMapping("/customers/{id}")
-    public Customer getCustomerById (@PathVariable Long id) {
-        return customerService.findById(id);
+    public ResponseEntity<?> getCustomerById (@PathVariable Long id) {
+        Optional<Customer> customerOptional = customerService.findById(id);
+
+        if(customerOptional.isPresent()) {
+            Customer customer = customerOptional.get();
+
+            CustomerDTO customerDTO = CustomerDTO.builder()
+                    .id(customer.getId())
+                    .documentType(customer.getDocumentType())
+                    .documentNumber(customer.getDocumentNumber())
+                    .firstName(customer.getFirstName())
+                    .lastName(customer.getLastName())
+                    .email(customer.getEmail())
+                    .phoneNumber(customer.getPhoneNumber())
+                    .build();
+
+            return ResponseEntity.ok(customerDTO);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/customers")
-    public List<Customer> getCustomers () {
-        return customerService.findAll();
+    public ResponseEntity<?> getCustomers () {
+
+        List<CustomerDTO> customersDTOS = customerService.findAll()
+                .stream()
+                .map(customer -> CustomerDTO.builder()
+                        .id(customer.getId())
+                        .documentType(customer.getDocumentType())
+                        .documentNumber(customer.getDocumentNumber())
+                        .firstName(customer.getFirstName())
+                        .lastName(customer.getLastName())
+                        .email(customer.getEmail())
+                        .phoneNumber(customer.getPhoneNumber())
+                        .build()).toList();
+
+        return ResponseEntity.ok(customersDTOS);
     }
 
     @PostMapping("/customers")
-    public ResponseEntity<Customer> saveCustomer (@RequestBody Customer customer) {
-        Customer customerSaved = customerService.createCustomer(customer);
-        return new ResponseEntity<>(customerSaved, HttpStatus.CREATED);
+    public ResponseEntity<?> saveCustomer (@RequestBody CustomerDTO customerDTO) throws URISyntaxException {
+
+        customerService.createCustomer(Customer.builder()
+                .documentType(customerDTO.getDocumentType())
+                .documentNumber(customerDTO.getDocumentNumber())
+                .firstName(customerDTO.getFirstName())
+                .lastName(customerDTO.getLastName())
+                .email(customerDTO.getEmail())
+                .phoneNumber(customerDTO.getPhoneNumber())
+                .build());
+
+        return ResponseEntity.created(new URI("/api/customers")).build();
+
     }
 
+    @PutMapping("/customers/{id}")
+    public ResponseEntity<?> updateCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO){
+
+        Optional<Customer> customerOptional = customerService.findById(id);
+
+        if(customerOptional.isPresent()){
+            Customer customer = customerOptional.get();
+            customer.setDocumentType(customerDTO.getDocumentType());
+            customer.setDocumentNumber(customerDTO.getDocumentNumber());
+            customer.setFirstName(customerDTO.getFirstName());
+            customer.setLastName(customerDTO.getLastName());
+            customer.setEmail(customerDTO.getEmail());
+            customer.setPhoneNumber(customerDTO.getPhoneNumber());
+            customerService.createCustomer(customer);
+            return ResponseEntity.ok("Registro Actualizado");
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+
+
     @DeleteMapping("/customers/{id}")
-    public void deleteCustomerById(@PathVariable Long id){
-        customerService.deleteById(id);
+    public ResponseEntity<?> deleteCustomerById(@PathVariable Long id){
+
+        if(id != null) {
+            customerService.deleteById(id);
+            return ResponseEntity.ok("Registro Eliminado");
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 }

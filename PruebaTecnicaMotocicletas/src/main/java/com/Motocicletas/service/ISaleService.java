@@ -1,7 +1,7 @@
 package com.Motocicletas.service;
 
-import com.Motocicletas.DTO.request.SaleDTO;
-import com.Motocicletas.DTO.response.SaleResponseDTO;
+import com.Motocicletas.dto.sale.request.SaleDTO;
+import com.Motocicletas.dto.sale.response.SaleResponseDTO;
 import com.Motocicletas.model.Sale;
 
 import java.util.List;
