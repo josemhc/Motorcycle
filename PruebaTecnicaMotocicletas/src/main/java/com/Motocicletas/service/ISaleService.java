@@ -9,4 +9,6 @@ import java.util.List;
 public interface ISaleService {
     Sale createSale(SaleDTO saleDTO);
     public SaleResponseDTO getSaleById (Long id);
+    public List<SaleResponseDTO> getSales ();
+    public void deleteSale (Long id);
 }

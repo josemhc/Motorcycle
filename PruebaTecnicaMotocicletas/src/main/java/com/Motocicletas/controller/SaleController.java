@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -18,6 +19,12 @@ public class SaleController {
 
     @Autowired
     private ISaleService saleService;
+
+    @GetMapping("/sales")
+    public ResponseEntity<List<SaleResponseDTO>> getSales () {
+        List<SaleResponseDTO> saleDTO = saleService.getSales();
+        return new ResponseEntity<>(saleDTO, HttpStatus.OK);
+    }
 
     @GetMapping("/sales/{id}")
     public ResponseEntity<SaleResponseDTO> getSaleById (@PathVariable Long id) {

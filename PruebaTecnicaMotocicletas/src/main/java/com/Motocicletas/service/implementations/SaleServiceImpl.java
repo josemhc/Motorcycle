@@ -30,6 +30,7 @@ public class SaleServiceImpl implements ISaleService {
     @Autowired
     private IEmployeeRepository employeeRepository;
 
+    @Override
     public SaleResponseDTO getSaleById (Long id) {
 
         // Encontramos la venta por id (Si existe, si no lanzamos un error)
@@ -37,8 +38,11 @@ public class SaleServiceImpl implements ISaleService {
         Sale sale = saleRepository.findById(id).orElseThrow();
 
         // Guardamos los nombres del cliente y el empleado asociados a la venta
+
         String customerName = sale.getCustomer().getFirstName() + " " + sale.getCustomer().getLastName();
         String employeeName = sale.getEmployee().getFirstName() + " " + sale.getEmployee().getLastName();
+
+        // Por cada detalle de la Venta, se va a crear su respectivo DTO, y se agregan a una lista
 
         List<SaleDetailResponseDTO> detailsDTOs = sale.getSaleDetails().stream().map( detail -> {
             Product p = detail.getProduct();
@@ -47,7 +51,39 @@ public class SaleServiceImpl implements ISaleService {
                     p.getProductCode(), p.getBrand(),
                     p.getPrice(), detail.getAmount(), subtotal);
         }).toList();
+
+        // Se crea un DTO de la venta que se envia al cliente con el DTO de los detalles de venta
         return new SaleResponseDTO(sale.getId(), customerName, employeeName, sale.getTotal(), detailsDTOs);
+    }
+
+    @Override
+    public List<SaleResponseDTO> getSales () {
+
+        //        private Long saleId;
+        //        private String customerName;
+        //        private String employeeName;
+        //        private double total;
+        //        private List<SaleDetailResponseDTO> details;
+
+        List<Sale> sales = (List<Sale>) saleRepository.findAll();
+
+        List<SaleResponseDTO> salesDTO = sales.stream().map(sale -> {
+            String customerName = sale.getCustomer().getFirstName() + " " + sale.getCustomer().getLastName();
+            String employeeName = sale.getEmployee().getFirstName() + " " + sale.getEmployee().getLastName();
+
+            List<SaleDetailResponseDTO> detailsDTO = sale.getSaleDetails().stream().map( detail -> {
+                Product p = detail.getProduct();
+                double subtotal = p.getPrice() * detail.getAmount();
+                return new SaleDetailResponseDTO(
+                        p.getProductCode(), p.getBrand(),
+                        p.getPrice(), detail.getAmount(), subtotal);
+            }).toList();
+
+            return new SaleResponseDTO(sale.getId(), customerName, employeeName, sale.getTotal(), detailsDTO);
+        }).toList();
+
+        return salesDTO;
+
     }
 
     @Override
@@ -84,5 +120,11 @@ public class SaleServiceImpl implements ISaleService {
         sale.setTotal(total);
 
         return saleRepository.save(sale);
+    }
+
+    @Override
+    public void deleteSale (Long id) {
+        Sale sale = saleRepository.findById(id).orElseThrow();
+        saleRepository.deleteById(sale.getId());
     }
 }
