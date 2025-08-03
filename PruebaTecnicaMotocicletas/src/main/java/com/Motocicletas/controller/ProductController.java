@@ -79,7 +79,6 @@ public class ProductController {
 
         if(productOptional.isPresent()){
             Product product = productOptional.get();
-            product.setId(productDTO.getId());
             product.setProductCode(productDTO.getProductCode());
             product.setItem(productDTO.getItem());
             product.setDescription(productDTO.getDescription());

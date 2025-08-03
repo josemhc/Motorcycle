@@ -1,0 +1,511 @@
+{
+	"info": {
+		"_postman_id": "b742f803-e7e6-4945-826f-1346751f6101",
+		"name": "Motocicletas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47175153",
+		"_collection_link": "https://aerospace-saganist-52193985-4049371.postman.co/workspace/Jose's-Workspace~cf7ba8e4-c64f-4e77-89a2-d73952ffd67b/collection/47175153-b742f803-e7e6-4945-826f-1346751f6101?action=share&source=collection_link&creator=47175153"
+	},
+	"item": [
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Get Customers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"codigo\": 12345,\n  \"item\": 1,\n  \"descripcion\": \"Moto X1000\",\n  \"precio\": 15000.50,\n  \"marca\": \"Motocicletas XYZ\"\n}\n"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/customers",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/customers/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"documentType\": \"CC\",\n  \"documentNumber\": \"1012345678\",\n  \"firstName\": \"María\",\n  \"lastName\": \"Pérez\",\n  \"email\": \"maria.perez@example.com\",\n  \"phoneNumber\": \"3123456789\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/customers",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/customers/5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"documentType\": \"CC\",\n  \"documentNumber\": \"1012345678\",\n  \"firstName\": \"Luciana\",\n  \"lastName\": \"Pérez\",\n  \"email\": \"maria.perez@example.com\",\n  \"phoneNumber\": \"3123456789\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/customers/5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ADMIN\",\r\n    \"password\": \"1234\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/products",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/products/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productCode\": 1213232,\n  \"item\": 2,\n  \"description\": \"Moto X1000\",\n  \"price\": 40000.50,\n  \"brand\": \"Motocicletas XYZ\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/products",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n    \"productCode\": \"MOTO900\",\n    \"item\": \"230\",\n    \"description\": \"Motocicleta 430\",\n    \"price\": 5000000.0,\n    \"brand\": \"Harley\",\n    \"saleDetails\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/products/5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Get Employees",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ADMIN\",\r\n    \"password\": \"1234\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/employees",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/employees/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"employees",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"documentType\": \"TI\",\n  \"documentNumber\": \"1098765432\",\n  \"firstName\": \"Juan\",\n  \"lastName\": \"García\",\n  \"birthDate\": \"1988-03-12\",\n  \"position\": \"Vendedor\",\n  \"email\": \"juan.garcia@example.com\",\n  \"phoneNumber\": \"3109876543\",\n  \"address\": \"Carrera 45 #22-30\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/employees",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Employee By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/employees/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"employees",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Employee By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"documentType\": \"TI\",\n  \"documentNumber\": \"1098765432\",\n  \"firstName\": \"Roberto\",\n  \"lastName\": \"Ruiz\",\n  \"birthDate\": \"1988-03-12\",\n  \"position\": \"Vendedor\",\n  \"email\": \"juan.garcia@example.com\",\n  \"phoneNumber\": \"3109876543\",\n  \"address\": \"Carrera 45 #22-30\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/employees/5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"employees",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sales",
+			"item": [
+				{
+					"name": "Get Sales",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"documentType\": \"TI\",\n  \"documentNumber\": \"1098765432\",\n  \"firstName\": \"Juan\",\n  \"lastName\": \"García\",\n  \"birthDate\": \"1988-03-12\",\n  \"position\": \"Vendedor\",\n  \"email\": \"juan.garcia@example.com\",\n  \"phoneNumber\": \"3109876543\",\n  \"address\": \"Carrera 45 #22-30\"\n}\n"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/sales",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"sales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sale",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientId\": 1,\n  \"employeeId\": 1,\n  \"details\": [\n    {\n      \"productId\": 2,\n      \"quantity\": 2\n    },\n    {\n      \"productId\": 1,\n      \"quantity\": 1\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/sales",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"sales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sale By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/sales/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"sales",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/sales/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"sales",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080",
+			"type": "default"
+		}
+	]
+}

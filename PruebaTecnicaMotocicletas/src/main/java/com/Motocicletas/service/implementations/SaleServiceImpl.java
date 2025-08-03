@@ -5,9 +5,7 @@ import com.Motocicletas.dto.sale.request.SaleDTO;
 import com.Motocicletas.dto.saledetails.request.SaleDetailDTO;
 import com.Motocicletas.dto.saledetails.response.SaleDetailResponseDTO;
 import com.Motocicletas.dto.sale.response.SaleResponseDTO;
-import com.Motocicletas.model.Product;
-import com.Motocicletas.model.Sale;
-import com.Motocicletas.model.SaleDetail;
+import com.Motocicletas.model.*;
 import com.Motocicletas.repository.ICustomerRepository;
 import com.Motocicletas.repository.IEmployeeRepository;
 import com.Motocicletas.repository.IProductRepository;
@@ -40,8 +38,8 @@ public class SaleServiceImpl implements ISaleService {
 
         // Guardamos los nombres del cliente y el empleado asociados a la venta
 
-        String customerName = sale.getCustomer().getFirstName() + " " + sale.getCustomer().getLastName();
-        String employeeName = sale.getEmployee().getFirstName() + " " + sale.getEmployee().getLastName();
+        Customer customer = sale.getCustomer();
+        Employee employee = sale.getEmployee();
 
         // Por cada detalle de la Venta, se va a crear su respectivo DTO, y se agregan a una lista
 
@@ -54,7 +52,7 @@ public class SaleServiceImpl implements ISaleService {
         }).toList();
 
         // Se crea un DTO de la venta que se envia al cliente con el DTO de los detalles de venta
-        return new SaleResponseDTO(sale.getId(), customerName, employeeName, sale.getTotal(), detailsDTOs);
+        return new SaleResponseDTO(sale.getId(), customer, employee, sale.getTotal(), detailsDTOs);
     }
 
     @Override
@@ -69,8 +67,8 @@ public class SaleServiceImpl implements ISaleService {
         List<Sale> sales = (List<Sale>) saleRepository.findAll();
 
         List<SaleResponseDTO> salesDTO = sales.stream().map(sale -> {
-            String customerName = sale.getCustomer().getFirstName() + " " + sale.getCustomer().getLastName();
-            String employeeName = sale.getEmployee().getFirstName() + " " + sale.getEmployee().getLastName();
+            Customer customer = sale.getCustomer();
+            Employee employee = sale.getEmployee();
 
             List<SaleDetailResponseDTO> detailsDTO = sale.getSaleDetails().stream().map( detail -> {
                 Product p = detail.getProduct();
@@ -80,7 +78,7 @@ public class SaleServiceImpl implements ISaleService {
                         p.getPrice(), detail.getAmount(), subtotal);
             }).toList();
 
-            return new SaleResponseDTO(sale.getId(), customerName, employeeName, sale.getTotal(), detailsDTO);
+            return new SaleResponseDTO(sale.getId(), customer, employee, sale.getTotal(), detailsDTO);
         }).toList();
 
         return salesDTO;
