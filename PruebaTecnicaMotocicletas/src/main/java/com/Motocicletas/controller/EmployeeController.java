@@ -3,10 +3,12 @@ package com.Motocicletas.controller;
 import com.Motocicletas.dto.employee.EmployeeDTO;
 
 import com.Motocicletas.model.Employee;
+import com.Motocicletas.model.Employee;
 
 import com.Motocicletas.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -114,12 +116,22 @@ public class EmployeeController {
     @DeleteMapping("/employees/{id}")
     public ResponseEntity<?> deleteEmployeeById(@PathVariable Long id){
 
-        if(id != null) {
-            employeeService.deleteById(id);
-            return ResponseEntity.ok("Registro Eliminado");
+        if(id == null) {
+            return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.badRequest().build();
+        Optional<Employee> employee = employeeService.findById(id);
+
+        if(!employee.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id no encontrado");
+        }
+
+        if(!employee.get().getSales().isEmpty()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("No se puede eliminar el empleado porque tiene ventas asociadas.");
+        }
+
+        employeeService.deleteById(id);
+        return ResponseEntity.ok("Registro Eliminado");
 
     }
 }

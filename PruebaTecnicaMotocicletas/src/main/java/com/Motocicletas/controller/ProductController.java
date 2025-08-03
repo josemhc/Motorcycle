@@ -2,8 +2,10 @@ package com.Motocicletas.controller;
 
 import com.Motocicletas.dto.product.ProductDTO;
 import com.Motocicletas.model.Product;
+import com.Motocicletas.model.Product;
 import com.Motocicletas.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -92,7 +94,23 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/{id}")
-    public void deleteProductById(@PathVariable Long id){
+    public ResponseEntity<?> deleteProductById(@PathVariable Long id){
+
+        if(id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Optional<Product> product = productService.findById(id);
+
+        if(!product.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id no encontrado");
+        }
+
+        if(!product.get().getSaleDetails().isEmpty()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("No se puede eliminar el producto porque tiene detalles de ventas asociados.");
+        }
+
         productService.deleteById(id);
+        return ResponseEntity.ok("Registro Eliminado");
     }
 }

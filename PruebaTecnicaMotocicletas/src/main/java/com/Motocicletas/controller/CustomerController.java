@@ -102,11 +102,22 @@ public class CustomerController {
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<?> deleteCustomerById(@PathVariable Long id){
 
-        if(id != null) {
-            customerService.deleteById(id);
-            return ResponseEntity.ok("Registro Eliminado");
+        if(id == null) {
+            return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.badRequest().build();
+        Optional<Customer> customer = customerService.findById(id);
+
+        if(!customer.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id no encontrado");
+        }
+
+        if(!customer.get().getSales().isEmpty()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("No se puede eliminar el cliente porque tiene ventas asociadas.");
+        }
+
+            customerService.deleteById(id);
+            return ResponseEntity.ok("Registro Eliminado");
+
     }
 }
