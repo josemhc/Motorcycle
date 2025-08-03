@@ -39,7 +39,7 @@ Además, se creó una entidad (Sale) para modelar las ventas del sistema, donde 
 Cada venta puede incluir uno o más detalles de venta (SaleDetail), los cuales están vinculados a un único producto.
 Esta estructura permite registrar múltiples productos en una sola venta si se requiere.
 
-![MER](./MER.png)
+![MER](imgREADME/MER.png)
 
 
 ## Correr la aplicacion
@@ -68,11 +68,11 @@ Ahora levantaremos la API de SpringBoot con Maven
 
 #### Dirigete al archivo que ejecuta la aplicacion llamado: 
 
-![img_8.png](img_8.png)
+![img_8.png](imgREADME/img_8.png)
 
 #### Ejecuta el icono que esta en la parte superior derecha:
 
-![img_7.png](img_7.png)
+![img_7.png](imgREADME/img_7.png)
 
 #### O en su defecto en la raiz del proyecto utiliza el comando:
 
@@ -95,21 +95,21 @@ psql -h localhost -p 5432 -U admin -d postgres -f ./PruebaTecnicaMotocicletas/sr
 Los Endpoints se pueden encontrar y ejecutar en el postman brindado como un archivo json en la raiz del proyecto con nombre:
 
 
-![Imagen del json Postman](img.png)
+![Imagen del json Postman](imgREADME/img.png)
 
 ### Importa el json en Postman en el boton que dice Import:
 
-![img_1.png](img_1.png)
+![img_1.png](imgREADME/img_1.png)
 
 ### Selecciona el json
 
-![img_4.png](img_4.png)
+![img_4.png](imgREADME/img_4.png)
 
 ### Accede y prueba los endpoints
 
 Ahora puedes acceder a los diferentes endpoints que tiene la API de SpringBoot del proyecto con su respectiva URL y ejemplo de uso
 
-![img_3.png](img_3.png)
+![img_3.png](imgREADME/img_3.png)
 
 ## Consultas SQL
 
