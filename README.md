@@ -65,10 +65,23 @@ docker compose up -d
 Ahora levantaremos la API de SpringBoot con Maven
 
 ### Correr springboot
+
+#### Dirigete al archivo que ejecuta la aplicacion llamado: 
+
+![img_8.png](img_8.png)
+
+#### Ejecuta el icono que esta en la parte superior derecha:
+
+![img_7.png](img_7.png)
+
+#### O en su defecto en la raiz del proyecto utiliza el comando:
+
 ``````
 ./mvnw spring-boot:run
 ``````
-# Antes de probar la API
+# Nota importante: Antes de probar la API
+
+## Inserta los datos de prueba despues de correr SpringBoot y antes de insertar los tuyos para evitar problemas de IDs
 
 ### Insertar los datos iniciales
 ``````
@@ -79,9 +92,24 @@ psql -h localhost -p 5432 -U admin -d postgres -f ./PruebaTecnicaMotocicletas/sr
 
 ## Endpoints
 
-Los Endpoints se pueden encontrar y ejecutar en el postman brindado como un archivo json en la raiz del proyecto
+Los Endpoints se pueden encontrar y ejecutar en el postman brindado como un archivo json en la raiz del proyecto con nombre:
 
-Motocicletas.postman_collection.json
+
+![Imagen del json Postman](img.png)
+
+### Importa el json en Postman en el boton que dice Import:
+
+![img_1.png](img_1.png)
+
+### Selecciona el json
+
+![img_4.png](img_4.png)
+
+### Accede y prueba los endpoints
+
+Ahora puedes acceder a los diferentes endpoints que tiene la API de SpringBoot del proyecto con su respectiva URL y ejemplo de uso
+
+![img_3.png](img_3.png)
 
 ## Consultas SQL
 
