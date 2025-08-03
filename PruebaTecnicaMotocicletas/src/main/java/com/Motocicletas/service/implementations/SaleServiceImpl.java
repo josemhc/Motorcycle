@@ -91,8 +91,8 @@ public class SaleServiceImpl implements ISaleService {
         // Aqui se guarda el empleado y el cliente al que esta asociada la venta que se crea, utilizando un DTO para manejar solo los datos necesarios
 
         Sale sale = new Sale();
-        sale.setCustomer(customerRepository.findById(saleDTO.getClientId()).orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con id: " + saleDTO.getClientId())));
-        sale.setEmployee(employeeRepository.findById(saleDTO.getEmployeeId()).orElseThrow(() -> new ResourceNotFoundException("Empleado no encontrado con id: " + saleDTO.getClientId())));
+        sale.setCustomer(customerRepository.findById(saleDTO.getCustomerId()).orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con id: " + saleDTO.getCustomerId())));
+        sale.setEmployee(employeeRepository.findById(saleDTO.getEmployeeId()).orElseThrow(() -> new ResourceNotFoundException("Empleado no encontrado con id: " + saleDTO.getCustomerId())));
 
         List<SaleDetail> details = new ArrayList<>();
         double total = 0;

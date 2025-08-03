@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 public class SaleDTO {
-    private Long clientId;
+    private Long customerId;
     private Long employeeId;
     private List<SaleDetailDTO> details;
 
