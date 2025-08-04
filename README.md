@@ -160,3 +160,27 @@ JOIN products p ON sd.product_id = p.id
 WHERE p.brand = 'Suzuki'
 GROUP BY e.id, e.first_name, e.last_name;
 ``````
+
+### Correr el FrontEnd
+
+Si quieres probar la API desde una interfaz de usuario amigable
+utiliza el frontend sencillo hecho en React que esta en la carpeta crud-frontend
+
+#### Requisitos:
+
+- Node.js v18+ (Necesario que esté instalado)
+- npm o Yarn (Viene incluido con Node.js)
+- React (En las dependencias del proyecto)
+- Git (Necesario que esté instalado)
+- Editor de código (VS Code, WebStorm, etc.)
+- Navegador web moderno (Chrome, Firefox, Safari, Edge)
+- Terminal/CMD (Para ejecutar comandos npm/yarn)
+
+En la carpeta raiz ejecuta los siguientes comandos:
+
+``````
+cd crud-frontend
+npm start
+``````
+
+![img.png](imgREADME/frontend.png)
